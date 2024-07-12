@@ -2,13 +2,13 @@ import pickle
 from pathlib import Path
 
 import pandas as pd
-import ploty.express as px
+import plotly.express as px
 import streamlit as st
 import streamlit_authenticator as stauth
 
 st.set_page_config(page_title="Campfire Shops - RTU Inventory", layout="wide")
 
-# --- USER AUTHENTECATION
+# --- USER AUTHENTECATIONS
 names = ["Samir Tarda", "John Martini"]
 usernames = ["starda", "jmartini"]
 
@@ -48,8 +48,6 @@ if authentication_status == True:
 
         authenticator.logout("Logout", "sidebar")
         # Sidebar navigation
-        if st.sidebar.button("Home/Dashboard"):
-            st.experimental_rerun()
         if st.sidebar.button("Add/Edit Unit"):
             add_edit_unit(df)
         if st.sidebar.button("Add Ticket"):
