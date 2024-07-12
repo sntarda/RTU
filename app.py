@@ -2,17 +2,17 @@ import pickle
 from pathlib import Path
 
 import pandas as pd
-import plotly.express as px
+import plotly.express as px  # Corrected this line
 import streamlit as st
 import streamlit_authenticator as stauth
 
 st.set_page_config(page_title="Campfire Shops - RTU Inventory", layout="wide")
 
-# --- USER AUTHENTECATIONS
+# --- USER AUTHENTICATIONS
 names = ["Samir Tarda", "John Martini"]
 usernames = ["starda", "jmartini"]
 
-# load hashed passwords
+# Load hashed passwords
 file_path = Path(__file__).parent / "hashed_pw.pkl"
 with file_path.open("rb") as file:
     hashed_passwords = pickle.load(file)
@@ -21,7 +21,7 @@ authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
                                     "my_dashboard", "samboca", cookie_expiry_days=30)
 
 name, authentication_status, username = authenticator.login("login", "main")
-                                    
+
 if authentication_status == False:
     st.error("Username or password is incorrect")
 if authentication_status == None:
@@ -52,7 +52,7 @@ if authentication_status == True:
             add_edit_unit(df)
         if st.sidebar.button("Add Ticket"):
             add_ticket(df)
-        
+
         # Display AC units in Building 1001
         if 'Building' in df.columns:
             building_1001_units = df[df['Building'] == 1001]
@@ -74,7 +74,7 @@ if authentication_status == True:
 
     def add_edit_unit(df):
         st.write("### Add/Edit Unit")
-        
+
         # Form to add or edit a unit
         with st.form(key='unit_form'):
             rtu = st.text_input("RTU", key="rtu")
@@ -93,7 +93,7 @@ if authentication_status == True:
             power_supply = st.text_input("Power Supply", key="power_supply")
             routine_service = st.date_input("Routine Service", key="routine_service")
             status = st.selectbox("Status", ["Operational", "Repair Required", "Off", "Standby", "Due for Service", "Decommissioned", "Testing"], key="status")
-            
+
             submit_button = st.form_submit_button(label='Submit')
 
         # Handle form submission
@@ -122,7 +122,7 @@ if authentication_status == True:
 
     def add_ticket(df):
         st.write("### Add Ticket")
-        
+
         # Form to add a ticket
         with st.form(key='ticket_form'):
             rtu = st.text_input("RTU", key="ticket_rtu")
@@ -133,7 +133,7 @@ if authentication_status == True:
             repair_status = st.selectbox("Repair Status", ["Complete", "Pending"], key="repair_status")
             date_repaired = st.date_input("Date Repaired", key="date_repaired")
             cost = st.number_input("Cost", min_value=0.0, step=0.1, key="cost")
-            
+
             submit_button = st.form_submit_button(label='Submit')
 
         # Handle form submission
