@@ -11,6 +11,7 @@ st.set_page_config(page_title="Campfire Shops - RTU Inventory", layout="wide")
 # --- USER AUTHENTICATIONS
 names = ["Samir Tarda", "John Martini"]
 usernames = ["starda", "jmartini"]
+passwords = ["pass815714", "pass4321"]
 
 # Load hashed passwords
 file_path = Path(__file__).parent / "hashed_pw.pkl"
